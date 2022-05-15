@@ -1,4 +1,4 @@
-package com.github.theredbrain.redBrainsTweaks.mixin.item;
+package com.github.theredbrain.dirtyThings.mixin.item;
 
 import net.minecraft.block.*;
 import net.minecraft.entity.player.PlayerEntity;

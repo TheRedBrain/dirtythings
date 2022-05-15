@@ -1,4 +1,4 @@
-package com.github.theredbrain.redBrainsTweaks.mixin.entity.mob;
+package com.github.theredbrain.dirtyThings.mixin.entity.mob;
 
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnReason;

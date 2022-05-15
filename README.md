@@ -1,3 +1,3 @@
-# RedBrain's Tweaks
+# Dirty Things
 
-A server-side mod which tweaks a few things to make the game more balanced.
+A mod which adds dirt slabs.

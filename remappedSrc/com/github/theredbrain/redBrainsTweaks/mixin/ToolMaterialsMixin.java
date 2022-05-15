@@ -1,4 +1,4 @@
-package com.github.theredbrain.redBrainsTweaks.mixin;
+package com.github.theredbrain.dirtyThings.mixin;
 
 import net.minecraft.item.ToolMaterials;
 import net.minecraft.recipe.Ingredient;

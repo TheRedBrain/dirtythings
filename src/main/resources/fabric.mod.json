@@ -1,28 +1,31 @@
 {
   "schemaVersion": 1,
-  "id": "red-brains-tweaks",
-  "version": "0.0.3",
+  "id": "dirty-things",
+  "version": "0.0.1",
 
-  "name": "RedBrains Tweaks",
-  "description": "This mod tweaks a few things to make the game more challenging and balanced.",
+  "name": "Dirty Things",
+  "description": "This mod adds dirt slabs.",
   "authors": [
     "TheRedBrain"
   ],
   "contact": {
-    "sources": "https://github.com/TheRedBrain/red-brains-tweaks"
+    "sources": "https://github.com/TheRedBrain/dirty-things"
   },
 
   "license": "MIT",
-  "icon": "assets/red-brains-tweaks/icon.png",
+  "icon": "assets/dirty-things/icon.png",
 
   "environment": "*",
   "entrypoints": {
     "main": [
-      "com.github.theredbrain.redBrainsTweaks.RedBrainsTweaks"
+      "com.github.theredbrain.dirtyThings.DirtyThings"
+    ],
+    "client": [
+      "com.github.theredbrain.dirtyThings.client.DirtyThingsClient"
     ]
   },
   "mixins": [
-    "red-brains-tweaks.mixins.json"
+    "dirty-things.mixins.json"
   ],
 
   "depends": {

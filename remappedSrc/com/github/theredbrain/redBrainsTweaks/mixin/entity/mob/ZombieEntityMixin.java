@@ -1,6 +1,6 @@
-package com.github.theredbrain.redBrainsTweaks.mixin.entity.mob;
+package com.github.theredbrain.dirtyThings.mixin.entity.mob;
 
-import com.github.theredbrain.redBrainsTweaks.entity.ai.goal.GroundMeatEatGoal;
+import com.github.theredbrain.dirtyThings.entity.ai.goal.GroundMeatEatGoal;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ai.goal.ActiveTargetGoal;
 import net.minecraft.entity.mob.HostileEntity;

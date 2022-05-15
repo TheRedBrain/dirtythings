@@ -1,4 +1,4 @@
-package com.github.theredbrain.redBrainsTweaks.mixin.entity.player;
+package com.github.theredbrain.dirtyThings.mixin.entity.player;
 
 import net.minecraft.entity.player.HungerManager;
 import net.minecraft.entity.player.PlayerEntity;

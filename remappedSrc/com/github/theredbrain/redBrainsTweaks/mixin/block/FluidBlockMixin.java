@@ -1,6 +1,6 @@
-package com.github.theredbrain.redBrainsTweaks.mixin.block;
+package com.github.theredbrain.dirtyThings.mixin.block;
 
-import com.github.theredbrain.redBrainsTweaks.RedBrainsTweaks;
+import com.github.theredbrain.dirtyThings.RedBrainsTweaks;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.FluidBlock;
 import net.minecraft.fluid.FlowableFluid;

@@ -1,4 +1,4 @@
-package com.github.theredbrain.redBrainsTweaks.mixin.entity.passive;
+package com.github.theredbrain.dirtyThings.mixin.entity.passive;
 
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.passive.VillagerEntity;

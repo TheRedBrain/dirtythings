@@ -1,4 +1,4 @@
-package com.github.theredbrain.redBrainsTweaks.entity.ai.goal;
+package com.github.theredbrain.dirtyThings.entity.ai.goal;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.ai.goal.Goal;

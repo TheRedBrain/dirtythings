@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "dirty-things:block/coarse_dirt_slab"
+    },
+    "type=double": {
+      "model": "minecraft:block/coarse_dirt"
+    }
+  }
+}

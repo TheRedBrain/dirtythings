@@ -1,7 +1,7 @@
-package com.github.theredbrain.redBrainsTweaks.mixin.entity.mob;
+package com.github.theredbrain.dirtyThings.mixin.entity.mob;
 
-import com.github.theredbrain.redBrainsTweaks.entity.ai.goal.EatCropsGoal;
-import com.github.theredbrain.redBrainsTweaks.entity.ai.goal.GroundFoodMateGoal;
+import com.github.theredbrain.dirtyThings.entity.ai.goal.EatCropsGoal;
+import com.github.theredbrain.dirtyThings.entity.ai.goal.GroundFoodMateGoal;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ai.goal.AnimalMateGoal;
 import net.minecraft.entity.ai.goal.GoalSelector;

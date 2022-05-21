@@ -3,8 +3,14 @@
     "type=bottom": {
       "model": "dirty-things:block/grass_slab"
     },
-    "type=double": {
+    "snowy=false,type=double": {
       "model": "minecraft:block/grass_block"
+    },
+    "snowy=true,type=double": {
+      "model": "minecraft:block/grass_block_snow"
+    },
+    "type=top": {
+      "model": "dirty-things:block/grass_slab"
     }
   }
 }

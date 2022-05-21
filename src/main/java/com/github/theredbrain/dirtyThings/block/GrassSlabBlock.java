@@ -2,17 +2,22 @@ package com.github.theredbrain.dirtyThings.block;
 
 import com.github.theredbrain.dirtyThings.DirtyThings;
 import net.minecraft.block.*;
+import net.minecraft.block.enums.SlabType;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.state.property.Properties;
 import net.minecraft.tag.FluidTags;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import net.minecraft.util.shape.VoxelShape;
+import net.minecraft.world.BlockView;
 import net.minecraft.world.WorldView;
 import net.minecraft.world.chunk.light.ChunkLightProvider;
 
 import java.util.Random;
 
 public class GrassSlabBlock extends CustomSlabBlock {
+    private static VoxelShape BOTTOM_SHAPE;
+    private static VoxelShape FULL_SHAPE;
     public GrassSlabBlock(Settings settings) {
         super(settings);
     }
@@ -51,11 +56,29 @@ public class GrassSlabBlock extends CustomSlabBlock {
                     if (world.getBlockState(blockPos).isOf(Blocks.DIRT) && canSpread(fullBlockState, world, blockPos)) {
                         world.setBlockState(blockPos, (BlockState)fullBlockState.with(SnowyBlock.SNOWY, world.getBlockState(blockPos.up()).isOf(Blocks.SNOW)));
                     } else if (world.getBlockState(blockPos).isOf(DirtyThings.DIRT_SLAB) && !(world.getBlockState(blockPos).get(WATERLOGGED)) && canSpread(slabBlockState, world, blockPos)) {
-                        world.setBlockState(blockPos, (BlockState)slabBlockState.with(TYPE, world.getBlockState(blockPos).get(TYPE)));
+                        world.setBlockState(blockPos, (BlockState)slabBlockState.with(TYPE, world.getBlockState(blockPos).get(TYPE)).with(SNOWY, world.getBlockState(blockPos.up()).isOf(Blocks.SNOW) && world.getBlockState(blockPos).get(TYPE) == SlabType.DOUBLE));
                     }
                 }
             }
 
+        }
+    }
+
+//    public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
+//        SlabType slabType = (SlabType)state.get(TYPE);
+//        switch(slabType) {
+//            case DOUBLE:
+//                return VoxelShapes.fullCube();
+//            default:
+//                return BOTTOM_SHAPE;
+//        }
+//    }
+
+    public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
+        if (state.get(TYPE) == SlabType.DOUBLE) {
+            return FULL_SHAPE;
+        } else {
+            return BOTTOM_SHAPE;
         }
     }
     // TODO implement bone meal growing
@@ -63,6 +86,7 @@ public class GrassSlabBlock extends CustomSlabBlock {
     static {
         TYPE = Properties.SLAB_TYPE;
         WATERLOGGED = Properties.WATERLOGGED;
+        FULL_SHAPE = Block.createCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 16.0D, 16.0D);
         BOTTOM_SHAPE = Block.createCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 8.0D, 16.0D);
     }
 }

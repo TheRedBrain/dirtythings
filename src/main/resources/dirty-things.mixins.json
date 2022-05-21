@@ -5,7 +5,8 @@
   "compatibilityLevel": "JAVA_17",
   "mixins": [
     "GrassBlockMixin",
-    "MyceliumBlockMixin"
+    "MyceliumBlockMixin",
+    "ShovelItemMixin"
   ],
   "injectors": {
     "defaultRequire": 1

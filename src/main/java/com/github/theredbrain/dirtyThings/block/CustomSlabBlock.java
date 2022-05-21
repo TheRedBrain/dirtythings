@@ -1,6 +1,6 @@
 package com.github.theredbrain.dirtyThings.block;
 
-//import com.github.theredbrain.dirtyThings.enums.SoilSlabType;
+import com.github.theredbrain.dirtyThings.DirtyThings;
 import net.minecraft.block.*;
 import net.minecraft.block.enums.SlabType;
 import net.minecraft.entity.ai.pathing.NavigationType;
@@ -9,33 +9,28 @@ import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
-import net.minecraft.server.world.ServerWorld;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.EnumProperty;
 import net.minecraft.state.property.Properties;
 import net.minecraft.state.property.Property;
+import net.minecraft.tag.BlockTags;
 import net.minecraft.tag.FluidTags;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
-import net.minecraft.util.shape.VoxelShape;
-import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.WorldAccess;
-import net.minecraft.world.WorldView;
-import net.minecraft.world.chunk.light.ChunkLightProvider;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Random;
-
 public abstract class CustomSlabBlock extends Block implements Waterloggable {
+
     protected static EnumProperty<SlabType> TYPE;
     protected static BooleanProperty WATERLOGGED;
-    protected static VoxelShape BOTTOM_SHAPE;
+    protected static final BooleanProperty SNOWY;
 
     protected CustomSlabBlock(Settings settings) {
         super(settings);
-        this.setDefaultState((BlockState)((BlockState)this.getDefaultState().with(TYPE, SlabType.BOTTOM)).with(WATERLOGGED, false));
+        this.setDefaultState((BlockState)((BlockState)this.getDefaultState().with(TYPE, SlabType.BOTTOM)).with(WATERLOGGED, false).with(SNOWY, false));
     }
 
     public boolean hasSidedTransparency(BlockState state) {
@@ -43,30 +38,23 @@ public abstract class CustomSlabBlock extends Block implements Waterloggable {
     }
 
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
-        builder.add(new Property[]{TYPE, WATERLOGGED});
+        builder.add(new Property[]{TYPE, WATERLOGGED, SNOWY});
     }
 
-    public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-        SlabType slabType = (SlabType)state.get(TYPE);
-        switch(slabType) {
-            case DOUBLE:
-                return VoxelShapes.fullCube();
-            default:
-                return BOTTOM_SHAPE;
-        }
+    private static boolean isSnow(BlockState state) {
+        return state.isIn(BlockTags.SNOW);
     }
 
     @Nullable
     public BlockState getPlacementState(ItemPlacementContext ctx) {
         BlockPos blockPos = ctx.getBlockPos();
         BlockState blockState = ctx.getWorld().getBlockState(blockPos);
-        if (blockState.isOf(this)) {
-            return (BlockState)((BlockState)blockState.with(TYPE, SlabType.DOUBLE)).with(WATERLOGGED, false);
+        BlockState blockStateUp = ctx.getWorld().getBlockState(ctx.getBlockPos().up());
+        if (blockState.getBlock() == this) {
+            return (BlockState)((BlockState)blockState.with(TYPE, SlabType.DOUBLE)).with(WATERLOGGED, false).with(SNOWY, isSnow(blockStateUp));
         } else {
             FluidState fluidState = ctx.getWorld().getFluidState(blockPos);
-            return (BlockState)((BlockState)this.getDefaultState().with(TYPE, SlabType.BOTTOM)).with(WATERLOGGED, fluidState.getFluid() == Fluids.WATER);
-//            Direction direction = ctx.getSide();
-//            return direction != Direction.DOWN && (direction == Direction.UP || !(ctx.getHitPos().y - (double)blockPos.getY() > 0.5D)) ? blockState2 : (BlockState)blockState2.with(TYPE, SlabType.TOP);
+            return (BlockState)((BlockState)this.getDefaultState().with(TYPE, SlabType.BOTTOM)).with(WATERLOGGED, fluidState.getFluid() == Fluids.WATER).with(SNOWY, false);
         }
     }
 
@@ -81,7 +69,7 @@ public abstract class CustomSlabBlock extends Block implements Waterloggable {
                     return direction == Direction.UP || bl && direction.getAxis().isHorizontal();
                 }
                 else {
-                    return false; //direction == Direction.DOWN || !bl && direction.getAxis().isHorizontal();
+                    return false;
                 }
             } else {
                 return true;
@@ -107,8 +95,11 @@ public abstract class CustomSlabBlock extends Block implements Waterloggable {
         if ((Boolean)state.get(WATERLOGGED)) {
             world.createAndScheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world));
         }
-
-        return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
+        if (direction == Direction.UP && (state.isOf(DirtyThings.GRASS_SLAB) || state.isOf(DirtyThings.PODZOL_SLAB) || state.isOf(DirtyThings.MYCELIUM_SLAB)) && state.get(TYPE) == SlabType.DOUBLE) {
+            return (BlockState)state.with(SNOWY, isSnow(neighborState));
+        } else {
+            return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
+        }
     }
 
     public boolean canPathfindThrough(BlockState state, BlockView world, BlockPos pos, NavigationType type) {
@@ -130,5 +121,13 @@ public abstract class CustomSlabBlock extends Block implements Waterloggable {
 
     public static EnumProperty<SlabType> getType() {
         return TYPE;
+    }
+
+//    public static BooleanProperty getSnowy() {
+//        return SNOWY;
+//    }
+
+    static {
+        SNOWY = Properties.SNOWY;
     }
 }

@@ -5,6 +5,9 @@
     },
     "type=double": {
       "model": "minecraft:block/rooted_dirt"
+    },
+    "type=top": {
+      "model": "dirty-things:block/rooted_dirt_slab"
     }
   }
 }

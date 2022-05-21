@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "dirty-things:block/sand_slab"
+    },
+    "type=double": {
+      "model": "minecraft:block/sand"
+    },
+    "type=top": {
+      "model": "dirty-things:block/sand_slab"
+    }
+  }
+}

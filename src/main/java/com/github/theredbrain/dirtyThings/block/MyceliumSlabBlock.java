@@ -2,12 +2,15 @@ package com.github.theredbrain.dirtyThings.block;
 
 import com.github.theredbrain.dirtyThings.DirtyThings;
 import net.minecraft.block.*;
+import net.minecraft.block.enums.SlabType;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.state.property.Properties;
 import net.minecraft.tag.FluidTags;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import net.minecraft.util.shape.VoxelShape;
+import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldView;
 import net.minecraft.world.chunk.light.ChunkLightProvider;
@@ -15,6 +18,8 @@ import net.minecraft.world.chunk.light.ChunkLightProvider;
 import java.util.Random;
 
 public class MyceliumSlabBlock extends CustomSlabBlock{
+    private static VoxelShape BOTTOM_SHAPE;
+    private static VoxelShape FULL_SHAPE;
     public MyceliumSlabBlock(Settings settings) {
         super(settings);
     }
@@ -70,9 +75,18 @@ public class MyceliumSlabBlock extends CustomSlabBlock{
 
     }
 
+    public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
+        if (state.get(TYPE) == SlabType.DOUBLE) {
+            return FULL_SHAPE;
+        } else {
+            return BOTTOM_SHAPE;
+        }
+    }
+
     static {
         TYPE = Properties.SLAB_TYPE;
         WATERLOGGED = Properties.WATERLOGGED;
+        FULL_SHAPE = Block.createCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 16.0D, 16.0D);
         BOTTOM_SHAPE = Block.createCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 8.0D, 16.0D);
     }
 }

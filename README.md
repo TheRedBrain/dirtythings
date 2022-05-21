@@ -1,3 +1,3 @@
 # Dirty Things
 
-A mod which adds dirt slabs.
+This mod adds slabs and piles for all overworld soil types.

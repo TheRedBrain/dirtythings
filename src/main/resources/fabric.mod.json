@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
   "id": "dirty-things",
-  "version": "0.0.1",
+  "version": "1.0.0",
 
   "name": "Dirty Things",
-  "description": "This mod adds dirt slabs.",
+  "description": "This mod adds slabs and piles for all overworld soil types.",
   "authors": [
     "TheRedBrain"
   ],

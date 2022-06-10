@@ -8,12 +8,11 @@ import net.minecraft.state.property.Properties;
 import net.minecraft.tag.FluidTags;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.WorldView;
 import net.minecraft.world.chunk.light.ChunkLightProvider;
-
-import java.util.Random;
 
 public class GrassSlabBlock extends CustomSlabBlock {
     private static VoxelShape BOTTOM_SHAPE;

@@ -39,7 +39,7 @@
                   "function": "minecraft:explosion_decay"
                 }
               ],
-              "name": "dirty-things:rooted_dirt_pile"
+              "name": "dirty-things:dirt_pile"
             }
           ]
         }

@@ -14,10 +14,10 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.WorldView;
 import net.minecraft.world.chunk.light.ChunkLightProvider;
 
-public class GrassSlabBlock extends CustomSlabBlock {
+public class DirtSlabBlock extends CustomSlabBlock {
     private static VoxelShape BOTTOM_SHAPE;
     private static VoxelShape FULL_SHAPE;
-    public GrassSlabBlock(Settings settings) {
+    public DirtSlabBlock(Settings settings) {
         super(settings);
     }
 
@@ -46,32 +46,25 @@ public class GrassSlabBlock extends CustomSlabBlock {
             world.setBlockState(pos, DirtyThings.DIRT_SLAB.getDefaultState().with(TYPE, state.get(TYPE)).with(WATERLOGGED, state.get(WATERLOGGED)));
         } else {
             if (world.getLightLevel(pos.up()) >= 9) {
-                BlockState fullBlockState = Blocks.GRASS_BLOCK.getDefaultState();
-                BlockState slabBlockState = this.getDefaultState();
+//                BlockState fullBlockState = Blocks.GRASS_BLOCK.getDefaultState();
+                BlockState grassSlabBlockState = DirtyThings.GRASS_SLAB.getDefaultState();
+                BlockState myceliumSlabBlockState = DirtyThings.MYCELIUM_SLAB.getDefaultState();
 
                 for(int i = 0; i < 4; ++i) {
                     BlockPos blockPos = pos.add(random.nextInt(3) - 1, random.nextInt(5) - 3, random.nextInt(3) - 1);
 
-                    if (world.getBlockState(blockPos).isOf(Blocks.DIRT) && canSpread(fullBlockState, world, blockPos)) {
-                        world.setBlockState(blockPos, (BlockState)fullBlockState.with(SnowyBlock.SNOWY, world.getBlockState(blockPos.up()).isOf(Blocks.SNOW)));
-                    } else if (world.getBlockState(blockPos).isOf(DirtyThings.DIRT_SLAB) && !(world.getBlockState(blockPos).get(WATERLOGGED)) && canSpread(slabBlockState, world, blockPos)) {
-                        world.setBlockState(blockPos, (BlockState)slabBlockState.with(TYPE, world.getBlockState(blockPos).get(TYPE)).with(SNOWY, world.getBlockState(blockPos.up()).isOf(Blocks.SNOW) && world.getBlockState(blockPos).get(TYPE) == SlabType.DOUBLE));
+                    if ((world.getBlockState(blockPos).isOf(Blocks.GRASS_BLOCK) || (world.getBlockState(blockPos).isOf(DirtyThings.GRASS_SLAB))) && canSpread(grassSlabBlockState, world, pos)) {
+                        world.setBlockState(pos, (BlockState)grassSlabBlockState.with(TYPE, world.getBlockState(pos).get(TYPE)).with(SnowyBlock.SNOWY, world.getBlockState(pos.up()).isOf(Blocks.SNOW) && world.getBlockState(pos).get(TYPE) == SlabType.DOUBLE));
+//                    } else if (world.getBlockState(blockPos).isOf(DirtyThings.DIRT_SLAB) && !(world.getBlockState(blockPos).get(WATERLOGGED)) && canSpread(slabBlockState, world, blockPos)) {
+//                        world.setBlockState(blockPos, (BlockState)slabBlockState.with(TYPE, world.getBlockState(blockPos).get(TYPE)).with(SNOWY, world.getBlockState(blockPos.up()).isOf(Blocks.SNOW) && world.getBlockState(blockPos).get(TYPE) == SlabType.DOUBLE));
+                    } else if ((world.getBlockState(blockPos).isOf(Blocks.MYCELIUM) || (world.getBlockState(blockPos).isOf(DirtyThings.MYCELIUM_SLAB))) && canSpread(myceliumSlabBlockState, world, pos)) {
+                        world.setBlockState(pos, (BlockState) myceliumSlabBlockState.with(TYPE, world.getBlockState(pos).get(TYPE)).with(SnowyBlock.SNOWY, world.getBlockState(pos.up()).isOf(Blocks.SNOW) && world.getBlockState(pos).get(TYPE) == SlabType.DOUBLE));
                     }
                 }
             }
 
         }
     }
-
-//    public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-//        SlabType slabType = (SlabType)state.get(TYPE);
-//        switch(slabType) {
-//            case DOUBLE:
-//                return VoxelShapes.fullCube();
-//            default:
-//                return BOTTOM_SHAPE;
-//        }
-//    }
 
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
         if (state.get(TYPE) == SlabType.DOUBLE) {

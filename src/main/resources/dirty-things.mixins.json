@@ -4,8 +4,6 @@
   "package": "com.github.theredbrain.dirtyThings.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
-    "GrassBlockMixin",
-    "MyceliumBlockMixin",
     "ShovelItemMixin"
   ],
   "injectors": {

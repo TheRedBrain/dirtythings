@@ -13,6 +13,8 @@ import net.minecraft.item.ItemUsageContext;
 import net.minecraft.item.ShovelItem;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
+import net.minecraft.tag.BlockTags;
+import net.minecraft.tag.TagKey;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -60,7 +62,7 @@ public class ShovelItemMixin {
 //                DirtyThings.LOGGER.info("This is a block");
             }
             BlockState blockState3 = null;
-            if (blockState2 != null && world.getBlockState(blockPos.up()).isAir()) {
+            if (blockState2 != null && (world.getBlockState(blockPos.up()).isAir() || world.getBlockState(blockPos.up()).isIn(BlockTags.FENCE_GATES))) {
                 world.playSound(playerEntity, blockPos, SoundEvents.ITEM_SHOVEL_FLATTEN, SoundCategory.BLOCKS, 1.0F, 1.0F);
                 blockState3 = blockState2;
             } else if (blockState.getBlock() instanceof CampfireBlock && (Boolean)blockState.get(CampfireBlock.LIT)) {

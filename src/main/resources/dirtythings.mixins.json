@@ -1,0 +1,13 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "com.github.theredbrain.dirtythings.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [
+    "BlockDustParticleMixin",
+    "ShovelItemMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

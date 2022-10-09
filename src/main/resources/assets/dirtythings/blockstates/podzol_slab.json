@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "dirtythings:block/podzol_slab"
+    },
+    "snowy=false,type=double": {
+      "model": "minecraft:block/podzol"
+    },
+    "snowy=true,type=double": {
+      "model": "minecraft:block/grass_block_snow"
+    },
+    "type=top": {
+      "model": "dirtythings:block/podzol_slab"
+    }
+  }
+}

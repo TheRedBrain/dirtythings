@@ -1,15 +1,15 @@
 {
   "replace": false,
   "values": [
-    "dirty-things:grass_slab",
-    "dirty-things:dirt_slab",
-    "dirty-things:coarse_dirt_slab",
-    "dirty-things:podzol_slab",
-    "dirty-things:mycelium_slab",
-    "dirty-things:dirt_path_slab",
-    "dirty-things:rooted_dirt_slab",
-    "dirty-things:sand_slab",
-    "dirty-things:red_sand_slab",
-    "dirty-things:gravel_slab"
+    "dirtythings:grass_slab",
+    "dirtythings:dirt_slab",
+    "dirtythings:coarse_dirt_slab",
+    "dirtythings:podzol_slab",
+    "dirtythings:mycelium_slab",
+    "dirtythings:dirt_path_slab",
+    "dirtythings:rooted_dirt_slab",
+    "dirtythings:sand_slab",
+    "dirtythings:red_sand_slab",
+    "dirtythings:gravel_slab"
   ]
 }

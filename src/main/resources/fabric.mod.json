@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "id": "dirty-things",
+  "id": "dirtythings",
   "version": "1.0.0",
 
   "name": "Dirty Things",
@@ -9,23 +9,23 @@
     "TheRedBrain"
   ],
   "contact": {
-    "sources": "https://github.com/TheRedBrain/dirty-things"
+    "sources": "https://github.com/TheRedBrain/dirtythings"
   },
 
   "license": "MIT",
-  "icon": "assets/dirty-things/icon.png",
+  "icon": "assets/dirtythings/icon.png",
 
   "environment": "*",
   "entrypoints": {
     "main": [
-      "com.github.theredbrain.dirtyThings.DirtyThings"
+      "com.github.theredbrain.dirtythings.DirtyThings"
     ],
     "client": [
-      "com.github.theredbrain.dirtyThings.client.DirtyThingsClient"
+      "com.github.theredbrain.dirtythings.client.DirtyThingsClient"
     ]
   },
   "mixins": [
-    "dirty-things.mixins.json"
+    "dirtythings.mixins.json"
   ],
 
   "depends": {
